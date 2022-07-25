@@ -1,19 +1,13 @@
-// FOR
 
-let tabla = parseInt(prompt("Que numero desea multiplicar?"))
+let poncho = 6000
 
-for(let i=0; i<=10; i++){
-    console.log(tabla + "x" + i + "=" + tabla*i);  
+function cantidad(){
+    let cantIngresada = parseInt(prompt ("Ingrese la cantidad de ponchos que desea comprar"))
+    resultado(cantIngresada * poncho)
+}
+function resultado(total){
+    console.log(`El total es ${total}`);
+    alert ("Su total es de " + total + " .Muchas gracias por su compra")
 }
 
-// WHILE
-
-let cliente = prompt("Desea ingresar un nuevo cliente?")
-
-while( cliente != "ESC"){
-    let clienteWhile = prompt("Ingrese el nuevo cliente")
-    console.log("Usted añadio a " + clienteWhile )
-    cliente = prompt("Desea ingresar otro cliente? *ESC para salir")
-
-}
-
+cantidad()
