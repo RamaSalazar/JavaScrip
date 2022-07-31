@@ -1,19 +1,16 @@
-//Declaración de la clase
 class products{
     constructor(id, product, description, price){
-        //propiedades o atributos de nuestra clase
         this.id = id,
         this.product = product,
         this.description = description,
         this.price = price
 
     }
-    //Métodos de nuestra clase
     showData(){
         console.log(`El producto es ${this.product} su descripcion es ${this.description} y su vales es $${this.price}. La id del producto es ${this.id}`)
     }
 }
-//Instanciación de objetos -- respetamos orden y cantidad de atributos
+
 let article = []
 const product1 = new products(1,"Poncho","poncho adulto de hilo de 1.8 mts", 6000)
 article.push(product1)
@@ -25,40 +22,65 @@ const product4 = new products(4,"Remera","remera de algodon primera calidad. Tal
 article.push(product4)
 const product5 = new products(5,"Bombacha de gaucho", "bombacha de gaucho de gabarnida primera calidad con bordaos", 6500)
 article.push(product5)
-const product6 = new products(6,"Boinas", "boinas de hilo de adulto o nio marca -El llano-", 2300)
+const product6 = new products(6,"Boina", "boinas de hilo de adulto o nio marca -El llano-", 2300)
 article.push(product6)
 
-//Cargar array forma directa
-//estanteria es nuestro array de objetos
 const stock = [product1,product2,product3,product4,product5,product6]
-
-//DECLARACIÓN DE FUNCIONES:
-
-//Crear una function que permita al usuario agregar un libro
-
-//mostrar catálogo
 
 function showCatalog(){
     alert(`Podrá ver nuestro catálogo en la consola:`)
-    //For of array de objetos
     for(let article of stock){
-        //Accedo a atributos de mi array de objetos
         article.showData()
     }
 }
 
-//Function que consulte al usuario opción deseada
+function searchProduct(){
+        let search = prompt("Ingrese el titulo del libro que desea buscar")
+        let searched = stock.find((sea)=>sea.product.toLowerCase() == search.toLowerCase())
+        if(searched == undefined){
+            console.log("No disponemos de ese producto")
+        }else{
+            console.log(`Tenemos el producto ${searched.product} y su precio es $${searched.price}`)
+        }
+        
+}
+
+function orderPrice(){
+    let option = prompt(`Ingrese MAYOR para ordenar de mayor a menor
+                         Ingrese MENOR para ordenar de menor a mayor
+    `)
+    if(option.toUpperCase() == "MAYOR"){
+        console.log(stock.sort((a,b)=> (b.price - a.price)))
+    }
+    else if(option.toUpperCase() == "MENOR"){
+        console.log(stock.sort((a,b)=> (a.price - b.price)))
+        
+    }
+}
+
+function discount(){
+    let disc = prompt( "Ingrese el cupon del descuento")
+    if (disc  == "KUNTUR")
+    {discount = stock.map((elemnt)=>elemnt.price *0.90)
+   
+console.log("El cupon fue aplicado correctamente, el nuevo precio es $" + discount)
+}
+else {disc != "KUNTUR"
+    console.log("Cupon invalido. Ingrese otro");
+}
+}
+
 function askOptions(){
     let option = parseInt(prompt(`Ingrese el número de la opción que desea realizar:
                         1 - Ver catálogo de productos
-                        2 - Buscar producto disponibles por tipo:
-                        3 - Buscar coincidencias:
+                        2 - Buscar producto disponibles:
+                        3 - Ordenar por precio:
+                        4 - Agregar cupon
                         0 - Para salir
                         `))
     menu(option)
 }
 
-//Function que ofrezca un menú
 function menu(optionSelect){
     switch(optionSelect){
         case 0:
@@ -70,13 +92,13 @@ function menu(optionSelect){
 
       	break 
    	    case 2: 
-            nuevoLibro()
+           searchProduct()
       	break 
    	    case 3: 
-            eliminarLibro()
+           orderPrice()
       	break
         case 4: 
-      	 
+            discount()
       	break
         case 5: 
       	 
@@ -86,7 +108,6 @@ function menu(optionSelect){
     }
 }
 
-//CÓDIGO:
 let salir 
 while(salir != true){
     askOptions()
