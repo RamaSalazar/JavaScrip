@@ -1,9 +1,10 @@
-class products{
-    constructor(id, product, description, price){
+class Products{
+    constructor(id, product, description, price, img){
         this.id = id,
         this.product = product,
         this.description = description,
-        this.price = price
+        this.price = price,
+        this.img = img
 
     }
     showData(){
@@ -12,17 +13,17 @@ class products{
 }
 
 let article = []
-const product1 = new products(1,"Poncho","poncho adulto de hilo de 1.8 mts", 6000)
+const product1 = new Products(1,"Poncho","poncho adulto de hilo de 1.8 mts", 6000, "./img/poncho.png")
 article.push(product1)
-const product2 = new products(2,"Ruana","ruana adulto de hilo de 1.8 mts", 5500)
+const product2 = new Products(2,"Ruana","ruana adulto de hilo de 1.8 mts", 5500,"./img/ruana.png")
 article.push(product2)
-const product3 = new products(3,"Alpargatas","alpargatas de eco-cuero o gabardina. Talle 35 - 43", 2000)
+const product3 = new Products(3,"Alpargatas","alpargatas de eco-cuero o gabardina. Talle 35 - 43", 2000,"./img/alpargata1.png")
 article.push(product3)
-const product4 = new products(4,"Remera","remera de algodon primera calidad. Talle S - XXL", 1400)
+const product4 = new Products(4,"Remera","remera de algodon primera calidad. Talle S - XXL", 1400,"./img/remera2.png")
 article.push(product4)
-const product5 = new products(5,"Bombacha de gaucho", "bombacha de gaucho de gabarnida primera calidad con bordaos", 6500)
+const product5 = new Products(5,"Bombacha de gaucho","bombacha de gaucho de gabarnida primera calidad con bordaos", 6500, "./img/bombacha1.png")
 article.push(product5)
-const product6 = new products(6,"Boina", "boinas de hilo de adulto o nio marca -El llano-", 2300)
+const product6 = new Products(6,"Boina","boinas de hilo de adulto o nio marca -El llano-", 2300, "./img/boina.png")
 article.push(product6)
 
 const stock = [product1,product2,product3,product4,product5,product6]
@@ -35,7 +36,7 @@ function showCatalog(){
 }
 
 function searchProduct(){
-        let search = prompt("Ingrese el titulo del libro que desea buscar")
+        let search = prompt("Ingrese el producto que desea buscar")
         let searched = stock.find((sea)=>sea.product.toLowerCase() == search.toLowerCase())
         if(searched == undefined){
             console.log("No disponemos de ese producto")
@@ -99,9 +100,7 @@ function menu(optionSelect){
       	break
         case 4: 
             discount()
-      	break
-        case 5: 
-      	 
+
       	break 
    	    default: 
       	alert("Ingrese una opción correcta")
@@ -113,3 +112,20 @@ while(salir != true){
     askOptions()
     
 }
+
+let cardProduct = document.getElementById("card__style")
+stock.forEach((hola)=>{
+    let cardStock = document.createElement("div")
+    cardStock.innerHTML = ` <article class="card">
+                                    <h2 class="card__title">${hola.product}</h2>
+                                    <picture class="hola">
+                                        <img class="card__img" src="${hola.img}" alt="">
+                                    </picture>
+                                    <p class="card__description">${hola.description}</p>
+                                    <h4 class="card__price">$${hola.price}</h4>
+                                    <button class="card__button">Agregar al carrito</button>
+                                </article>`
+    cardProduct.appendChild(cardStock)
+
+})
+
