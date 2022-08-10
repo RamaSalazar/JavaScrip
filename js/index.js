@@ -28,104 +28,136 @@ article.push(product6)
 
 const stock = [product1,product2,product3,product4,product5,product6]
 
-function showCatalog(){
-    alert(`Podrá ver nuestro catálogo en la consola:`)
-    for(let article of stock){
-        article.showData()
-    }
-}
+// function showCatalog(){
+//     alert(`Podrá ver nuestro catálogo en la consola:`)
+//     for(let article of stock){
+//         article.showData()
+//     }
+// }
 
-function searchProduct(){
-        let search = prompt("Ingrese el producto que desea buscar")
-        let searched = stock.find((sea)=>sea.product.toLowerCase() == search.toLowerCase())
-        if(searched == undefined){
-            console.log("No disponemos de ese producto")
-        }else{
-            console.log(`Tenemos el producto ${searched.product} y su precio es $${searched.price}`)
-        }
+// function searchProduct(){
+//         let search = prompt("Ingrese el producto que desea buscar")
+//         let searched = stock.find((sea)=>sea.product.toLowerCase() == search.toLowerCase())
+//         if(searched == undefined){
+//             console.log("No disponemos de ese producto")
+//         }else{
+//             console.log(`Tenemos el producto ${searched.product} y su precio es $${searched.price}`)
+//         }
         
-}
+// }
 
-function orderPrice(){
-    let option = prompt(`Ingrese MAYOR para ordenar de mayor a menor
-                         Ingrese MENOR para ordenar de menor a mayor
-    `)
-    if(option.toUpperCase() == "MAYOR"){
-        console.log(stock.sort((a,b)=> (b.price - a.price)))
-    }
-    else if(option.toUpperCase() == "MENOR"){
-        console.log(stock.sort((a,b)=> (a.price - b.price)))
+// function orderPrice(){
+//     let option = prompt(`Ingrese MAYOR para ordenar de mayor a menor
+//                          Ingrese MENOR para ordenar de menor a mayor
+//     `)
+//     if(option.toUpperCase() == "MAYOR"){
+//         console.log(stock.sort((a,b)=> (b.price - a.price)))
+//     }
+//     else if(option.toUpperCase() == "MENOR"){
+//         console.log(stock.sort((a,b)=> (a.price - b.price)))
         
-    }
-}
+//     }
+// }
 
-function discount(){
-    let disc = prompt( "Ingrese el cupon del descuento")
-    if (disc  == "KUNTUR")
-    {discount = stock.map((elemnt)=>elemnt.price *0.90)
+// function discount(){
+//     let disc = prompt( "Ingrese el cupon del descuento")
+//     if (disc  == "KUNTUR")
+//     {discount = stock.map((elemnt)=>elemnt.price *0.90)
    
-console.log("El cupon fue aplicado correctamente, el nuevo precio es $" + discount)
-}
-else {disc != "KUNTUR"
-    console.log("Cupon invalido. Ingrese otro");
-}
-}
+// console.log("El cupon fue aplicado correctamente, el nuevo precio es $" + discount)
+// }
+// else {disc != "KUNTUR"
+//     console.log("Cupon invalido. Ingrese otro");
+// }
+// }
 
-function askOptions(){
-    let option = parseInt(prompt(`Ingrese el número de la opción que desea realizar:
-                        1 - Ver catálogo de productos
-                        2 - Buscar producto disponibles:
-                        3 - Ordenar por precio:
-                        4 - Agregar cupon
-                        0 - Para salir
-                        `))
-    menu(option)
-}
+// function askOptions(){
+//     let option = parseInt(prompt(`Ingrese el número de la opción que desea realizar:
+//                         1 - Ver catálogo de productos
+//                         2 - Buscar producto disponibles:
+//                         3 - Ordenar por precio:
+//                         4 - Agregar cupon
+//                         0 - Para salir
+//                         `))
+//     menu(option)
+// }
 
-function menu(optionSelect){
-    switch(optionSelect){
-        case 0:
-            salir = true
-            alert("Gracias por visitarnos, vuelva pronto :D")
-        break    
-        case 1:
-            showCatalog()
+// function menu(optionSelect){
+//     switch(optionSelect){
+//         case 0:
+//             salir = true
+//             alert("Gracias por visitarnos, vuelva pronto :D")
+//         break    
+//         case 1:
+//             showCatalog()
 
-      	break 
-   	    case 2: 
-           searchProduct()
-      	break 
-   	    case 3: 
-           orderPrice()
-      	break
-        case 4: 
-            discount()
+//       	break 
+//    	    case 2: 
+//            searchProduct()
+//       	break 
+//    	    case 3: 
+//            orderPrice()
+//       	break
+//         case 4: 
+//             discount()
 
-      	break 
-   	    default: 
-      	alert("Ingrese una opción correcta")
-    }
-}
+//       	break 
+//    	    default: 
+//       	alert("Ingrese una opción correcta")
+//     }
+// }
 
-let salir 
-while(salir != true){
-    askOptions()
+// let salir 
+// while(salir != true){
+//     askOptions()
+    
+// }
+
+// let cardProduct = document.getElementById("card__style")
+// stock.forEach((prod)=>{
+//     let cardStock = document.createElement("div")
+//     cardStock.innerHTML = ` <article class="card">
+//                                     <h2 class="card__title">${prod.product}</h2>
+//                                     <picture class="hola">
+//                                         <img class="card__img" src="${prod.img}" alt="">
+//                                     </picture>
+//                                     <p class="card__description">${prod.description}</p>
+//                                     <h4 class="card__price">$${prod.price}</h4>
+//                                     <button class="card__button">Agregar al carrito</button>
+//                                 </article>`
+//     cardProduct.appendChild(cardStock)
+
+// })
+
+
+let articleProducts = document.getElementById("products")
+articleProducts.setAttribute("class", "productsStyle")
+function seeProducts(){
+
+    stock.forEach((prod)=>{
+        let newProduct = document.createElement("div")
+        newProduct.innerHTML = ` <article class="card">
+                                        <h2 class="card__title">${prod.product}</h2>
+                                        <picture class="hola">
+                                            <img class="card__img" src="${prod.img}" alt="">
+                                        </picture>
+                                        <p class="card__description">${prod.description}</p>
+                                        <h4 class="card__price">$${prod.price}</h4>
+                                        <button class="card__button">Agregar al carrito</button>
+                                    </article>`
+        articleProducts.appendChild(newProduct)
+    
+    })  
     
 }
 
-let cardProduct = document.getElementById("card__style")
-stock.forEach((hola)=>{
-    let cardStock = document.createElement("div")
-    cardStock.innerHTML = ` <article class="card">
-                                    <h2 class="card__title">${hola.product}</h2>
-                                    <picture class="hola">
-                                        <img class="card__img" src="${hola.img}" alt="">
-                                    </picture>
-                                    <p class="card__description">${hola.description}</p>
-                                    <h4 class="card__price">$${hola.price}</h4>
-                                    <button class="card__button">Agregar al carrito</button>
-                                </article>`
-    cardProduct.appendChild(cardStock)
+function ignoreProducts(){
+    articleProducts.innerHTML =""
+}
 
-})
+let seeProductsBtn = document.getElementById("seeProducts")
+seeProductsBtn.addEventListener("click", seeProducts)
+
+let ignoreProductsBtn = document.getElementById("ignoreProducts")
+ignoreProductsBtn.onclick = ignoreProducts
 

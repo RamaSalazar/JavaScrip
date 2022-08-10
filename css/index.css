@@ -14,20 +14,54 @@ body{
     background-color: black;
 }
 /* HEADER */
-.title {
+
+
+.column{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+}
+
+.flex__title {
     font-size: 5em;
     color: white;
 }
 
-.subtitle{
+.flex__subtitle{
     font-size: 3em;
     color: white;
 }
 /* MAIN */
+
+#seeProducts{
+    margin: 1rem;
+}
+
+#ignoreProducts{
+    margin: 1rem;
+}
+
+#products{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
 .title__pages {
     font-size: 4em;
     color: white;
+    display: flex;
+    justify-content: center;
 }
+
+.catBtn{
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+}
+
 /* CARD */
 .card{
     width: 350px;
@@ -71,4 +105,5 @@ body{
     padding: 0.5rem;
     margin-bottom: 1rem;
 }
+
 /* FOOTER */
