@@ -10,9 +10,7 @@ html{
     font-size: 62.5%;
 }
 /* BODY */
-body{
-    background-color: black;
-}
+
 /* HEADER */
 
 
@@ -25,13 +23,17 @@ body{
 
 .flex__title {
     font-size: 5em;
-    color: white;
 }
 
 .flex__subtitle{
     font-size: 3em;
-    color: white;
 }
+
+.dark__mode {
+    color:antiquewhite;
+    background-color: black;
+}
+
 /* MAIN */
 
 #seeProducts{
@@ -51,7 +53,6 @@ body{
 
 .title__pages {
     font-size: 4em;
-    color: white;
     display: flex;
     justify-content: center;
 }
@@ -90,7 +91,9 @@ body{
 .card__description{
     font-size: 1.6em;
     padding: 0.5rem;
+    height: 5rem;
     color: #2b2b2b;
+    text-align: center;
 }
 
 .card__price{
@@ -107,3 +110,14 @@ body{
 }
 
 /* FOOTER */
+
+
+/* prueba */
+
+.hide{
+    display: none;
+}
+
+.show{
+    display: block;
+}
