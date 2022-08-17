@@ -13,12 +13,34 @@ html{
 
 /* HEADER */
 
+header{
+    width: 1200px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-around;
+}
+
+input{
+    margin: 1rem;
+    width: 250px;
+}
 
 .column{
     display: flex;
     flex-direction: column;
     text-align: center;
     justify-content: center;
+}
+
+.mode{
+    display: flex;
+    flex-direction: row;
+}
+
+.dark__mode {
+    color:white;
+    background-color: black;
 }
 
 .flex__title {
@@ -29,12 +51,50 @@ html{
     font-size: 3em;
 }
 
-.dark__mode {
-    color:antiquewhite;
-    background-color: black;
+
+.card__cart{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    position: absolute;
+    top: 100px;
+    background-color: white;
 }
 
+.text__cart{
+    color: red;
+    font-size: 2em;
+    margin: 2rem;
+    text-align: center;
+}
+
+.modal__buy{
+    display: flex;
+    flex-direction: column;
+}
+
+.modal__card{
+    display: flex;
+    flex-direction: column;
+}
+
+.buy__btn{
+    margin-bottom: 1rem;
+}
+
+
+
 /* MAIN */
+main{
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+    width: 1200px;
+    margin: 0 auto;
+}
 
 #seeProducts{
     margin: 1rem;
@@ -52,6 +112,7 @@ html{
 }
 
 .title__pages {
+    margin-top: 5rem;
     font-size: 4em;
     display: flex;
     justify-content: center;
@@ -63,7 +124,44 @@ html{
     padding: 1rem;
 }
 
-/* CARD */
+.card__we{
+    width: 800px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 1rem;
+}
+
+.text__we{
+    margin-right: 2rem;
+    display: flex;
+    font-size: 3em;
+    text-align: center;
+    align-items: center;
+}
+
+.card__cat{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.text__cat{
+    width: 400px;
+    margin-top: 3rem;
+    margin-right: 2rem;
+    display: flex;
+    font-size: 3em;
+    text-align: center;
+    align-items: center;
+}
+
+.verMas__btn{
+    margin-top: 1rem;
+    width: 70px;
+}
+
+/* CARD  */
 .card{
     width: 350px;
     display: flex;

@@ -16,32 +16,52 @@
             <h2 class="flex__subtitle">Ropa de Campo</h2> 
         </section>        
     </article>
+<!-- Dark Mode -->
     <section class="mode">
-        <button id="btn__dark__mode" class="btn btn-dark">Dark</button>
-        <button id="btn__light__mode" class="btn btn-light">Light</button>        
+        <button id="btn__dark__mode" class="btn btn-dark">
+            <img src="img/moon.svg" alt="">
+        </button>
+        <button id="btn__light__mode" class="btn btn-light">
+            <img src="img/sun.svg" alt="">
+        </button>   
+        <button  id="cart__btn" type="button">
+            <img src="img/cart.svg" alt="">
+        </button>     
     </section>
+
+<!-- Carrito -->
+ <section class="card__cart">
+    <article class="modal__card nav__input" id="modal__card"></article>
+    <p class="text__cart" id="text__cart"></p>
+    <form class="modal__buy" id="modal__buy"></form>   
+</section>   
+
+
 </header>
 <!--Fin header-->
 <!--Inicio body-->
 <main>
+
+<!-- Principal -->
     <h1 class="title__pages">Bienvenidos</h1>
-        <p>Somos Belen y Ramiro Salazar, dos hermamos que amamos las tradiciones y el folclore! Acompañanos para ver todo lo que tenemos para ofrecerte y contarte</p>
-        <!-- <img src="" alt=""> -->
+    <article class="card__we">
+        <p class="text__we">Somos Belen y Ramiro Salazar, dos hermamos que amamos las tradiciones y el folclore! Acompañanos para ver todo lo que tenemos para ofrecerte y contarte</p>
+        <img src="img/nosotros 2.png" alt="">
+    </article>
+
+<!-- Catalogo -->
     <h1 class="title__pages">Catalogo</h1>
-        <h2>Te mostramos todo lo que tenemos para ofrecerte para mantener la tradicion sin perder el estilo</h2>
+    <article class="card__cat">
+        <h2 class="text__cat">Te mostramos todo lo que tenemos para ofrecerte para mantener la tradicion sin perder el estilo</h2>
         <div class="hide" id="hide__text">
             <article id="products"></article>
         </div>
-        <button class="verMas__btn" id="hide__text__btn">ver mas</button>
-        <!-- <section class="catBtn">
-            <button id="seeProducts">Ver Mas</button>
-            <button id="ignoreProducts">Ver Menos</button>
-        </section>
-    <div id="card__style"></div>
-    <article id="products"></article> -->
+        <button class="verMas__btn" id="hide__text__btn">ver mas</button>        
+    </article>
 
 
-    <!-- <article class="hide" id="hide__text"></article> -->
+
+
 </main>
 <!--Fin body-->
 <!--Inicio footer-->    
