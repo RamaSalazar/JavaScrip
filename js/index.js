@@ -149,15 +149,9 @@ const stock = clothing.concat(fabrics, accessories);
 let btnDarkMode = document.getElementById("btn__dark__mode")
 let btnLightMode = document.getElementById("btn__light__mode")
 
-let dark__mode
+let dark__mode = localStorage.getItem("dark__mode") ? localStorage.getItem("dark__mode") : localStorage.setItem("dark__mode", "light")
 console.log(localStorage.getItem("dark__mode"))
-if(localStorage.getItem("dark__mode")){
-    dark__mode = localStorage.getItem("dark__mode")
-}else{
-    console.log("entra primera vez")
-    localStorage.setItem("dark__mode", "light")
-} 
-
+ 
 if(dark__mode == "dark"){
     document.body.classList.add("dark__mode")
 }
@@ -172,43 +166,7 @@ btnLightMode.addEventListener("click", ()=>{
     localStorage.setItem("dark__mode", "light")
 })
 
-
-// funcionando
-
-// let articleProducts = document.getElementById("products")
-// articleProducts.setAttribute("class", "productsStyle")
-// function seeProducts(){
-
-//     stock.forEach((prod)=>{
-//         let newProduct = document.createElement("div")
-//         newProduct.innerHTML = ` <article class="card">
-//                                         <h2 class="card__title">${prod.product}</h2>
-//                                         <picture class="hola">
-//                                             <img class="card__img" src="${prod.img}" alt="">
-//                                         </picture>
-//                                         <p class="card__description">${prod.description}</p>
-//                                         <h4 class="card__price">$${prod.price}</h4>
-//                                         <button class="card__button">Agregar al carrito</button>
-//                                     </article>`
-//         articleProducts.appendChild(newProduct)
-    
-//     })  
-    
-// }
-
-// function ignoreProducts(){
-//     articleProducts.innerHTML =""
-// }
-
-// let seeProductsBtn = document.getElementById("seeProducts")
-// seeProductsBtn.addEventListener("click", seeProducts)
-
-// let ignoreProductsBtn = document.getElementById("ignoreProducts")
-// ignoreProductsBtn.onclick = ignoreProducts
-
-
 // Catalogo
-
 
 let articleProducts = document.getElementById("products")
 articleProducts.setAttribute("class", "productsStyle")
@@ -221,7 +179,9 @@ articleProducts.setAttribute("class", "productsStyle")
 
 
  function toggleText(){
-
+// prueba
+// toggleText = hide__text.classList.toggle("show") ? (articleProducts.innerHTML= "" , (hide__text__btn.innerHTML = "ver menos" ,  hide__text.classList.contains("show"))) : (hide__text__btn.innerHTML = "ver mas" )
+// fin
     hide__text.classList.toggle("show")
     
     articleProducts.innerHTML= ""
@@ -253,7 +213,7 @@ articleProducts.setAttribute("class", "productsStyle")
                                         </article>`
     articleProducts.appendChild(newProduct)
             let addBtn = document.getElementById(`addToCart${prod.id}`)
-            console.log(addBtn);
+            // console.log(addBtn);
 
             addBtn.addEventListener("click", ()=> addToCart(prod))
     })
@@ -274,6 +234,10 @@ cartBtn.addEventListener("click", () =>{
     addProdcutsToCart(productsInCart)
 })
 
+// pruba
+// stockCart = localStorage.getItem("stock") ? console.log(stockCart) : console.log("primera vez")  , (localStorage.setItem("stock",JSON.stringify(stockCart)))
+// fin
+
 if(localStorage.getItem("stock")){
     stockCart = JSON.parse(localStorage.getItem("stock"))
     console.log(stockCart)
@@ -283,8 +247,11 @@ else{
     stockCart.push(clothing.concat(fabrics, accessories))
     localStorage.setItem("stock",JSON.stringify(stockCart))
 }
-console.log(stockCart)
 
+
+// prueba
+// productsInCart = localStorage.getItem("cart") ? (JSON.parse(localStorage.getItem("cart"))) :    console.log("primera vez"), localStorage.setItem("cart",[]), console.log(productsInCart);
+// fin
 if(localStorage.getItem("cart")){
     productsInCart = JSON.parse(localStorage.getItem("cart"))
 }
@@ -293,7 +260,6 @@ else{
     localStorage.setItem("cart",[])
     console.log(productsInCart);
 }
-
 function addToCart(prod){
     console.log(`El producto es ${prod.product} su descripcion es ${prod.description} y su valor es $${prod.price}. Se agrego al carrito`);
     productsInCart.push(prod)
@@ -321,6 +287,25 @@ function total (totalPurchase){
         acum += cartTotal.price
     })
     console.log(acum);
+
+    // prueba
+// acum = 0 ? (textCart.innerHTML = `<p>Su carrito se encuentra vacio =(</p>`) :( `<p>El total de su compra es ${acum}</p>
+// <button id="buy__btn">Finalizar Comrprar</button>`)
+// let buyBtn = document.getElementById("buy__btn")
+// buyBtn.addEventListener("click",()=>{
+// total(productsInCart)
+// modal__buy.innerHTML += ` <input type="number" name="numbercard" id="numbercard" placeholder="Ingrese el numero de la tarjeta">
+//                             <input type="number" name="expday" id="expday" placeholder="Ingrese el vencimiento de la tajeta">
+//                             <input type="number" name="codseg" id="codseg" placeholder="Ingrese el codigo de seguridad">
+//                             <input type="text" name="name" id="name" placeholder="Ingrese el nombre del titular">
+//                             <input type="number" name="dni" id="dni" placeholder="Ingrese el D.N.I. del titular">
+//                             <button class="buy__btn" id="btn__buy"> Comprar</button>`
+// let btnBuy = document.getElementById("btn__buy")
+// btnBuy.addEventListener("click",buyBtnClick)
+// })
+// }
+    // fin
+
     if(acum == 0){
         textCart.innerHTML = `<p>Su carrito se encuentra vacio =(</p>`
     }
