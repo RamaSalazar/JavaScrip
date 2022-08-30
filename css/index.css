@@ -19,6 +19,7 @@ header{
     flex-direction: row;
     align-items: flex-end;
     justify-content: space-around;
+    margin: 0 auto;
 }
 
 input{
@@ -45,10 +46,12 @@ input{
 
 .flex__title {
     font-size: 5em;
+    color: #2C2B4B;;
 }
 
 .flex__subtitle{
     font-size: 3em;
+    color: #2C2B4B;
 }
 
 
@@ -116,6 +119,7 @@ main{
     font-size: 4em;
     display: flex;
     justify-content: center;
+    color: #DE3C4B;
 }
 
 .catBtn{
@@ -124,12 +128,15 @@ main{
     padding: 1rem;
 }
 
+/* Nosotros */
+
 .card__we{
     width: 800px;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    margin: 1rem;
+    margin: 0 auto;
+    padding-top: 3rem;
 }
 
 .text__we{
@@ -139,6 +146,8 @@ main{
     text-align: center;
     align-items: center;
 }
+
+/* Catalogo */
 
 .card__cat{
     display: flex;
@@ -161,7 +170,15 @@ main{
     width: 70px;
 }
 
-/* CARD  */
+.hide{
+    display: none;
+}
+
+.show{
+    display: block;
+}
+
+/* Card productos  */
 .card{
     width: 350px;
     display: flex;
@@ -207,15 +224,95 @@ main{
     margin-bottom: 1rem;
 }
 
-/* FOOTER */
+/* Galeria */
+.card__gal{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
+.text__gal{
+    width: 400px;
+    margin-top: 3rem;
+    margin-right: 2rem;
+    display: flex;
+    font-size: 3em;
+    text-align: center;
+    align-items: center;
+}
+/* FOOTER */
+footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+    gap: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: rgba(152, 151, 132, 0.5);
+    padding-top: 2rem;
+    margin-top: 3rem; 
+}
+
+  
+
+  .footer__card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 1rem; 
+}
+  
+  .footer__title {
+    color: #2C2B4B;
+    padding: 0.5rem 0;
+    font-size: 2.4em;
+    text-align: center;
+    display: inline-block; 
+}
+  
+  .footer__subtitle {
+    color: #2C2B4B;
+    padding: 0.2em 0;
+    font-size: 1.6em;
+    display: inline-block; 
+}
+  
+  .footer__title--pages {
+    color: white;
+    padding: 0.5rem 0;
+    font-size: 2.4em;
+    text-align: center;
+    display: inline-block; 
+}
+  
+  .footer_sutbtitle--pages {
+    color: white;
+    padding: 0.2em 0;
+    font-size: 1.6em;
+    display: inline-block; 
+}
+  
+.footer__div--icon{
+    display: flex;
+    flex-direction: row;
+}
+
+  .footer__icon {
+    padding: 0.5rem;
+    display: inline-block; 
+}
+  
+  .footer__link {
+    color: #2C2B4B; 
+}
 
 /* prueba */
 
-.hide{
-    display: none;
-}
 
-.show{
-    display: block;
-}
+
+
+

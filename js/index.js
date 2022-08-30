@@ -1,10 +1,3 @@
-
-// Swal.fire({
-//     title:"error",
-//     text:"esto es un error",
-//     icon:"error",
-//     confirmButtonText:"=(",
-// })
 // Class
 class Products{
     constructor(id, product, description, price, img){
@@ -20,36 +13,16 @@ class Products{
     }
 }
 
-// Arrays
-// Ropa
-
-let clothing = []
-const cloth2 = new Products(1,"Remera","remera de algodon primera calidad. Talle S - XXL", 1400,"./img/remera2.png")
-clothing.push(cloth2)
-const cloth3 = new Products(2,"Bombacha de gaucho","bombacha de gaucho de gabarnida primera calidad con bordaos", 6500, "./img/bombacha1.png")
-clothing.push(cloth3)
-const cloth1 = new Products(3,"Alpargatas","alpargatas de eco-cuero o gabardina. Talle 35 - 43", 2000,"./img/alpargata1.png")
-clothing.push(cloth1)
-
-
-// Tejidos
-
-let fabrics = []
-
-const fabr1 = new Products(4,"Poncho","poncho adulto de hilo de 1.8 mts", 6000, "./img/poncho.png")
-clothing.push(fabr1)
-const fabr2 = new Products(5,"Ruana","ruana adulto de hilo de 1.8 mts", 5500,"./img/ruana.png")
-clothing.push(fabr2)
-const fabr3 = new Products(6,"Boina","boinas de hilo de adulto o nio marca -El llano-", 2300, "./img/boina.png")
-clothing.push(fabr3) 
-
-// Accesorios
-
-let accessories = []
-
-// STOCK
-const stock = clothing.concat(fabrics, accessories);
-
+const stock = []
+fetch("stock.json")
+.then(resp => resp.json())
+.then(data=>{
+    console.log(data);
+    for(let prod of data){
+        let newProd = new Products(prod.id, prod.product, prod.description, prod.price, prod.img)
+        stock.push (newProd)
+    }
+})
 // DARK MODE
 
 let btnDarkMode = document.getElementById("btn__dark__mode")
@@ -85,9 +58,6 @@ articleProducts.setAttribute("class", "productsStyle")
 
 
  function toggleText(){
-// prueba
-// toggleText = hide__text.classList.toggle("show") ? (articleProducts.innerHTML= "" , (hide__text__btn.innerHTML = "ver menos" ,  hide__text.classList.contains("show"))) : (hide__text__btn.innerHTML = "ver mas" )
-// fin
     hide__text.classList.toggle("show")
     
     articleProducts.innerHTML= ""
@@ -149,9 +119,6 @@ cartBtn.addEventListener("click", () =>{
     addProdcutsToCart(productsInCart)
 })
 
-// pruba
-// stockCart = localStorage.getItem("stock") ? console.log(stockCart) : console.log("primera vez")  , (localStorage.setItem("stock",JSON.stringify(stockCart)))
-// fin
 
 if(localStorage.getItem("stock")){
     stockCart = JSON.parse(localStorage.getItem("stock"))
@@ -159,14 +126,13 @@ if(localStorage.getItem("stock")){
 }
 else{
     console.log("primera vez")
-    stockCart.push(clothing.concat(fabrics, accessories))
+
+    stockCart.push(stock)
     localStorage.setItem("stock",JSON.stringify(stockCart))
 }
 
 
-// prueba
-// productsInCart = localStorage.getItem("cart") ? (JSON.parse(localStorage.getItem("cart"))) :    console.log("primera vez"), localStorage.setItem("cart",[]), console.log(productsInCart);
-// fin
+
 if(localStorage.getItem("cart")){
     productsInCart = JSON.parse(localStorage.getItem("cart"))
 }
@@ -198,34 +164,17 @@ function addProdcutsToCart(productsStorage){
                                     </article>`
     })
 
-    total(productsStorage)
+    total(...productsStorage)
 
 }
 
-function total (totalPurchase){
+// Total
+function total (...totalPurchase){
     acum = 0;
-        totalPurchase.forEach((cartTotal) =>{
-        acum += cartTotal.price
-    })
-    console.log(acum);
-
-    // prueba
-// acum = 0 ? (textCart.innerHTML = `<p>Su carrito se encuentra vacio =(</p>`) :( `<p>El total de su compra es ${acum}</p>
-// <button id="buy__btn">Finalizar Comrprar</button>`)
-// let buyBtn = document.getElementById("buy__btn")
-// buyBtn.addEventListener("click",()=>{
-// total(productsInCart)
-// modal__buy.innerHTML += ` <input type="number" name="numbercard" id="numbercard" placeholder="Ingrese el numero de la tarjeta">
-//                             <input type="number" name="expday" id="expday" placeholder="Ingrese el vencimiento de la tajeta">
-//                             <input type="number" name="codseg" id="codseg" placeholder="Ingrese el codigo de seguridad">
-//                             <input type="text" name="name" id="name" placeholder="Ingrese el nombre del titular">
-//                             <input type="number" name="dni" id="dni" placeholder="Ingrese el D.N.I. del titular">
-//                             <button class="buy__btn" id="btn__buy"> Comprar</button>`
-// let btnBuy = document.getElementById("btn__buy")
-// btnBuy.addEventListener("click",buyBtnClick)
-// })
-// }
-    // fin
+        totalPurchase.forEach((cartTotal)=>{
+        acum += parseInt(cartTotal.price)
+        })
+        console.log(acum)
 
     if(acum == 0){
         textCart.innerHTML = `<p>Su carrito se encuentra vacio =(</p>`
@@ -242,40 +191,13 @@ function total (totalPurchase){
                 <input type="text" name="name" id="name" placeholder="Ingrese el nombre del titular">
                 <input type="number" name="dni" id="dni" placeholder="Ingrese el D.N.I. del titular">
                 <button class="buy__btn" id="btn__buy"> Comprar</button>`
-                let btnBuy = document.getElementById("btn__buy")
-                btnBuy.addEventListener("click",()=>{
-                    buyBtnClick
-                    Swal.fire({
-                        title: 'Compra Realizada',
-                        text: `Muchas gracias por su compra, pronto podra disfrutarla`,
-                        icon: 'success',
-                        confirmButtonText: 'Cerrar'
-                      })
-                } )
+                })
+                localStorage.removeItem("cart")
+            }
+            
+        }
+        
 
-            })
-
-    }
-
-}
-
-function buyBtnClick(){
-    addToCart.innerHTML=""
-    total()
-    // addProdcutsToCart.innerHTML=""
-
-}
-
-
-function formCard (){
-    let numbercard = document.getElementById("numbercard").value;
-    let expday = document.getElementById("expday").value;
-    let codseg = document.getElementById("codseg").value;
-    let name = document.getElementById("name").value;
-    let dni = document.getElementById("dni").value;
-
-    alert ("Su compra fue realizada")
-}
 
 
 
