@@ -13,7 +13,8 @@
 </head>
 <body>
 <!-- Inicio Header -->
-<header>
+<header >
+    <img class="logo" src="./img/logo.svg" alt="Logo de la marca">
     <article class="flex">
         <section class="column">
             <h1 class="flex__title">Kuntur</h1>
@@ -39,7 +40,7 @@
     <p class="text__cart" id="text__cart"></p>
     <form class="modal__buy" id="modal__buy"></form>   
 </section>   
-
+<article id="contCart"></article>
 </header>
 <!--Fin header-->
 <!--Inicio body-->
@@ -67,6 +68,28 @@
 <article class="card__gal">
     <h2 class="text__gal">No te imagines como queda la prenda, mejor miralas en nuestros modelos</h2>
 </article>
+<section id="galery">
+    <img src="./img/img1.png" alt="">
+    <img src="./img/img2.png" alt="">
+    <img src="./img/img3.png" alt="">
+    <img src="./img/img4.png" alt="">
+    <img src="./img/img5.png" alt="">
+    <img src="./img/img6.png" alt="">
+    <img src="./img/img7.png" alt="">
+    <img src="./img/img8.png" alt="">
+    <img src="./img/img9.png" alt="">
+    <img src="./img/img10.png" alt="">
+    <img src="./img/img11.png" alt="">
+    <img src="./img/img12.png" alt="">
+</section>
+<section id="contain__main">
+    <div id="contain__secon">
+        <img id="img__act" src="./img/img1.png" alt="">
+        <button id="btn__close" type="button">X</button>
+        <button id="btn__next" type="button">next</button>
+        <button id="btn__prev" type="button">prev</button>
+    </div>
+</section>
 
 
 
@@ -84,8 +107,8 @@
     </section>
     <section class="footer__card">
         <h2 class="footer__title">Preguntas Frecuentes</h2>
-            <h3 class="footer__subtitle">Como comprar</h3>
-            <h3 class="footer__subtitle">Envios</h3>
+            <h3 class="footer__subtitle" id="btn__buy">Como comprar</h3>
+            <h3 class="footer__subtitle" id="btn__shipp"> Envio</h3>
     </section>
     <section class="footer__card">
         <h2 class="footer__title">Nuestras Redes</h2>
@@ -102,6 +125,7 @@
 </footer>
 <!--Fin footer-->
 <script src="./js/index.js"></script>
+<!-- <script src="./js/prueba.js"></script> -->
 <!-- bootstrap -->
 </body>
 </html>
