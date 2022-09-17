@@ -4,21 +4,24 @@
         "product":"Remera",
         "description":"remera de algodon primera calidad. Talle S - XXL",
         "price":1400,
-        "img":"./img/remera2.png"
+        "img":"./img/remera2.png",
+        "cant": 1
     },
     {       
         "id":2,
         "product":"Bombacha de gaucho",
         "description": "bombacha de gaucho de gabarnida primera calidad con bordaos",
         "price": 6500,
-        "img":"./img/bombacha1.png"
+        "img":"./img/bombacha1.png",
+        "cant": 1
     },
     {
         "id": 3,
         "product": "Alpargatas",
         "description": "alpargatas de eco-cuero o gabardina. Talle 35 - 43",
         "price": 2000,
-        "img": "./img/alpargata1.png"
+        "img": "./img/alpargata1.png",
+        "cant": 1
     },
     {
           
@@ -26,7 +29,8 @@
         "product": "Poncho",
         "description": "poncho adulto de hilo de 1.8 mts",
         "price": 6000,
-        "img": "./img/poncho.png"
+        "img": "./img/poncho.png",
+        "cant": 1
     },
     {
         
@@ -34,7 +38,8 @@
         "product": "Ruana",
         "description": "ruana adulto de hilo de 1.8 mts",
         "price": 5500,
-        "img": "./img/ruana.png"
+        "img": "./img/ruana.png",
+        "cant": 1
     },
     {
           
@@ -42,6 +47,7 @@
         "product": "Boina",
         "description": "boinas de hilo de adulto o nio marca -El llano-",
         "price": 2300,
-        "img": "./img/boina.png"
+        "img": "./img/boina.png",
+        "cant": 1
     }
 ]

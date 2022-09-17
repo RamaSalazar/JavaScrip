@@ -1,11 +1,12 @@
  // Class
-class Products{
-    constructor(id, product, description, price, img){
+ class Products{
+    constructor(id, product, description, price, img, cant){
         this.id = id,
         this.product = product,
         this.description = description,
         this.price = price,
-        this.img = img
+        this.img = img,
+        this.cant = cant
 
     }
     showData(){
@@ -19,69 +20,90 @@ fetch("stock.json")
 .then(data=>{
     console.log(data);
     for(let prod of data){
-        let newProd = new Products(prod.id, prod.product, prod.description, prod.price, prod.img)
+        let newProd = new Products(prod.id, prod.product, prod.description, prod.price, prod.img, prod.cant)
         stock.push (newProd)
     }
 })
-// DARK MODE
 
+
+// Variables / Const
+// Botones
 let btnDarkMode = document.getElementById("btn__dark__mode")
 let btnLightMode = document.getElementById("btn__light__mode")
+let btnShipp = document.getElementById("btn__shipp")
+let btnBuy = document.getElementById("btn__buy")
+let btnCart = document.getElementById("cart__btn")
+const btnRemove = document.getElementById("btn__removeCart")
+const btnClose = document.getElementById("btn__close")
+const btnNext = document.getElementById("btn__next")
+const btnPrev = document.getElementById("btn__prev")
+let buyCart = document.getElementById("btn__buy--cart")
 
-let dark__mode = localStorage.getItem("dark__mode") ? localStorage.getItem("dark__mode") : localStorage.setItem("dark__mode", "light")
-console.log(localStorage.getItem("dark__mode"))
- 
-if(dark__mode == "dark"){
-    document.body.classList.add("dark__mode")
-}
 
-btnDarkMode.addEventListener("click", ()=>{
-    document.body.classList.add("dark__mode")
-    localStorage.setItem("dark__mode", "dark")
+let dark__mode = localStorage.getItem("nigth") ? localStorage.getItem("nigth") : localStorage.setItem("nigth", "light")
+// console.log(localStorage.getItem("dark__mode"))
+let articleProducts = document.getElementById("products")
+let hide__text__btn = document.getElementById ("hide__text__btn")
+let hide__text = document.getElementById("hide__text")
+const contCart = document.getElementById("cont__cart")
+const counterCart = document.getElementById("acc__cart")
+const totalPrice = document.getElementById("total__price")
+let contador=0
+const lightBox = document.getElementById("contain__main")
+const imgAct =document.getElementById("img__act")
+const images =document.querySelectorAll("#galery img")
+const cartModal = document.getElementById("modal__cart")
+// const prodCart = document.getElementById("products__cart")
+let indexImg =0;
+let cart = []
 
+// DARK MODE
+
+const mode = document.getElementById("nigth")
+const body = document.querySelector("body")
+
+mode.addEventListener("change",()=>{
+    body.classList.toggle("nigthMode")
+    localStorage.setItem("nigth" , "dark")
 })
-btnLightMode.addEventListener("click", ()=>{
-    document.body.classList.remove("dark__mode")
-    localStorage.setItem("dark__mode", "light")
-})
+
+// prueba cambiar logo
+// const logoMostrado = "logo"
+
+// function changeLogo(){
+//     const img =document.getElementById("imgprueba")
+//     if(logoMostrado == "logo"){
+//         img.src = "./img/logoNeon.jpg"
+//         logoMostrado = "logoNeon"
+//     }else{
+//         img.src = ".img/logo.svg"
+//         logoMostrado = "logo"
+//     }
+// }
+// fin
+
+// MAIN
 
 // Catalogo
-
-let articleProducts = document.getElementById("products")
 articleProducts.setAttribute("class", "productsStyle")
-
- let hide__text__btn = document.getElementById ("hide__text__btn")
-
- let hide__text = document.getElementById("hide__text")
-
- hide__text__btn.addEventListener("click", toggleText)
-
+hide__text__btn.addEventListener("click", toggleText)
 
  function toggleText(){
     hide__text.classList.toggle("show")
-    
     articleProducts.innerHTML= ""
-    
     if(hide__text.classList.contains("show")){
-    
     hide__text__btn.innerHTML = "ver menos"
-    
     }
-    
     else {
-    
     hide__text__btn.innerHTML = "ver mas"
-    
     }
     
     stock.forEach((prod) =>{
-    
-    let newProduct = document.createElement("div")
-    
+    let newProduct = document.createElement("div")   
     // setTimeout(()=>{
     //     Swal.fire({
-    //         title: 'Descuento',
-    //         text: `No te olvides de ingresar nuestro descuento al momento de tu compra`,
+    //         title: 'Hola',
+    //         text: `Cualquier consulta que tengas escribinos al WhatsApp`,
     //         icon: 'info',
     //         showConfirmButton:false,
     //         timer:3000
@@ -89,248 +111,159 @@ articleProducts.setAttribute("class", "productsStyle")
     // },2000)
     newProduct.innerHTML = ` <article class="card">
                                             <h2 class="card__title">${prod.product}</h2>
-                                            <picture class="hola">
+                                            <picture>
                                                 <img class="card__img" src="${prod.img}" alt="">
                                             </picture>
                                             <p class="card__description">${prod.description}</p>
                                             <h4 class="card__price">$${prod.price}</h4>
-                                            <button class="card__button" id="addToCart${prod.id}">Agregar al carrito</button>
+                                            <button id="addToCart${prod.id}" class="card__button" >Agregar al carrito</button>
                                         </article>
                                        `
-    articleProducts.appendChild(newProduct)
-            let addBtn = document.getElementById(`addToCart${prod.id}`)
-            // console.log(addBtn);
-
-            addBtn.addEventListener("click", ()=> addToCart(prod))
-    })
-
-    
-    }
-
-// Agregar al carrito
-
-let stockCart = []
-let productsInCart = []
-let modalCart = document.getElementById("modal__cart")
-let cartBtn = document.getElementById("cart__btn")
-let textCart = document.getElementById("text__cart")
-let cartCont =document.getElementById("contCart")
-
-cartBtn.addEventListener("click", () =>{
-    addProdcutsToCart(productsInCart)
-})
-
-
-if(localStorage.getItem("stock")){
-    stockCart = JSON.parse(localStorage.getItem("stock"))
-    console.log(stockCart)
-}
-else{
-    console.log("primera vez")
-    stockCart.push(stock)
-    localStorage.setItem("stock",JSON.stringify(stockCart))
-}
-
-if(localStorage.getItem("cart")){
-    productsInCart = JSON.parse(localStorage.getItem("cart"))
-}
-else{
-    console.log("primera vez");
-    localStorage.setItem("cart",[])
-    console.log(productsInCart);
-}
-
-
-function addToCart(prod){
-    console.log(`El producto es ${prod.product} su descripcion es ${prod.description} y su valor es $${prod.price}. Se agrego al carrito`);
-    productsInCart.push(prod)
-    console.log(productsInCart);
-    localStorage.setItem("cart", JSON.stringify(productsInCart))
-    Swal.fire({
-        title: 'FELICIDADES',
-        text: `Se añadio ${prod.product} al carrito`,
-        icon: 'info',
-        confirmButtonText: 'Listo'
-      })
-    //   upCart()
-}
-
-function addProdcutsToCart(productsStorage){
-
-    modal__card.innerHTML = ""
-    productsStorage.forEach((prodCart)=>{
-        modal__card.innerHTML += ` <article class="card">
-                                        <h2 class="card__title">${prodCart.product}</h2>
-                                        <h4 class="card__price">$${prodCart.price}</h4>
-                                        <button id="botonEliminar${prodCart.id}">eliminar</button>
-                                        <button id="vaciar">vaciar</button>
-                                    </article>`
-                                            // vaciar
-
-    })
-
-
-
-    total(productsStorage)
-
-}
-
-// let vaciar = document.getElementById("vaciar")
-// vaciar.addEventListener("click",()=>{
-//     vaciar.removeItem(productsInCarts)
-// })
-// Actualizar Carrito
-// let upCart =() =>{
-//     stock.forEach ((prod)=>{
-//         let div = document.createElement("div")
-//         div.className ("card")
-//         div.innerHTML = ` 
-//         <p> ${prod.title}</p>
-//         <p> precio: ${prod.price}</p>
-//         <p> Cantidad: <span id ="cant"></span>${prod.cant}</p>
-//         <button onclick = "removeCart(${prod.id})">eliminar</button>
-//         `
-//         cartCont.appendChild(div)
-//     })
-// }
-
-// Eliminar del carrito
-let removeCart = ((prodId) =>{
-    document.getElementById(`botonEliminar${prodCart.id}`).addEventListener("click",()=>{
-        console.log(`Producto ${prodCart.title} eliminado`)
-        let item = addToCart.find((prodCart) => prodCart.id === prodId)
-        let index = addToCart.indexOf(item)
-        addToCart.splice(index,1)
-        stockCart()
-    })
-
-    
-})
  
+    articleProducts.appendChild(newProduct)
+    const btnAddCart = document.getElementById( `addToCart${prod.id}`)
+    btnAddCart.addEventListener("click",()=>{
+    addCart(prod.id)
+
+})
+
+}
+)}
+
+const addCart = (prodId) => {
+    const exits = cart.some (prod => prod.id === prodId)
+
+if(exits){
+    const prod = cart.map (prod => {
+        if (prod.id === prodId){
+            prod.cant++
+        }
+    })
+}else{
+    const item =  stock.find ((prod) => prod.id === prodId) 
+    cart.push (item)
+    // console.log(cart);
+
+}
+actCart()
+}
+  
+const actCart = () =>{ 
+    contCart.innerHTML = "Aca te vamos a mostrar tus productos"
+    cart.forEach((prod) =>{
+        const div = document.createElement("div")
+        div.className = ("products__cart")
+        div.id = ("products__cart")
+    div.innerHTML =  `
+                        <h3>${prod.product}</h3>
+                        <h4>precio: ${prod.price}</h4>
+                        <p>cantidad: <spam id="cantidad">${prod.cant}</spam></p>
+                        <button onclick = "deletCart(${prod.id})" class="btn__delete"><img src="./img/delete.svg" alt=""></button>
+                                `
+        contCart.appendChild(div)
+        // localStorage.setItem("carrito",JSON.stringify(carrito))
+    })
+    counterCart.innerHTML = cart.length
+    totalPrice.innerHTML = cart.reduce((acc, prod) => acc + prod.price * prod.cant,0)
+
+}
+
+const deletCart = (prodId) =>{
+    const item = cart.find((prod) =>prod.id === prodId)
+    const indice = cart.indexOf(item)
+    cart.splice(indice,1)
+    actCart()
+}
+
+
+// const deletCart = (prod) => {
+//     const prodCart = document.getElementById("products__cart")
+//     const cantidad = document.getElementById("cantidad")
+//     const div = document.createElement("div")
+//     div.innerHTML = "hola   "
+//     cantidad.remove(prod.cant)
+//     prodCart.remove()
+//     // totalPrice.innerHTML = cart.reduce((acc, prod) => acc + prod.price * prod.cant,0)
+// }
 
 
 // prueba
+// function deletCart(e){
+//     const btnDelet = e.target
+//     const div = btnDelet.closest("#products__cart")
+//     const cant = div.querySelector("#cantidad").textContent
+//     for(let i=0; i<cart.length ; i++){
+//         if(cart[i].cant.trim() === cant.trim()){
+//             cart.splice(i,1)
+//         }
+//     }
+//     div.remove()
+//     actCart()
+// }
+// fin pruba 
 
-// productsStorage.forEach((prodCart, indice)=>{
-//     //capturamos el boton sin usar variable y adjuntamos evento
-//     document.getElementById(`botonEliminar${prodCart.id}`).addEventListener('click', () => {
-//         //Dentro del evento:
-//         console.log(`Producto ${prodCart.title} eliminado`)
-//         //Eliminamos del DOM
-//         let cardProducto = document.getElementById(`card${prodCart.id}`)
-//         console.log(cardProducto);
-//         cardProducto.remove()
+// prueba 2
+    // function deletCart(e){
+    //     if (e.target.classList.contains("btn__delete")){
+    //         const deleteId = e.target.getAttribute("id")
+    //         cart.forEach(value=>{
+    //             if(value.id ==deleteId){
+    //                 totalPrice.innerHTML = cart.reduce((acc, prod) => acc + prod.price * prod.cant,0)
+    //             }
+    //         })
+    //         cart = cart.filter(prod => prod.id !== deleteId)
+    //     }
+    //     if(cart.length === 0){
+    //         totalPrice.innerHTML = 0
+    //         counterCart = 0 
+    //     }
+    //     actCart()
+    // }
+// fin prueba
 
-//         //Eliminamos del array compras
-//         productsCart.splice(indice, 1)
-//         console.log(productsCart)
-//         localStorage.setItem("cart", JSON.stringify(productsCart))
-//         //Vuelvo a imprimir
-//         addProdcutsToCart(productsCart)
-//     })  
 
+btnRemove.addEventListener("click",()=>{
+    cart.length = 0 
+    actCart()
+})
+// btnRemove.addEventListener("click",()=>{
+//     const prodCart = document.getElementById("products__cart")
+
+//     if( prodCart == ""){
+//         contCart.innerHTML += "Su carrito se encuentra ya se encuentra vacio"
+//     }
+//     else{
+//         cart.length = 0 
+//         actCart()
+//     }
+ 
 // })
 
-// productsStorage()
-
-// Total
-function total (totalPurchase){
-    acum = 0;
-        totalPurchase.forEach((cartTotal)=>{
-        acum += parseInt(cartTotal.price)
-        })
-        console.log(acum)
-
-    if(acum == 0){
-        textCart.innerHTML = `<p>Su carrito se encuentra vacio =(</p>`
-    }
-    else {
-        textCart.innerHTML = `<p>El total de su compra es ${acum}</p>
-                                <button id="buy__btn">Finalizar Comrprar</button>`
-        let buyBtn = document.getElementById("buy__btn")
-        buyBtn.addEventListener("click",()=>{
-            total(productsInCart)
-                modal__buy.innerHTML += ` <input type="number" name="numbercard" id="numbercard" placeholder="Ingrese el numero de la tarjeta">
-                <input type="number" name="expday" id="expday" placeholder="Ingrese el vencimiento de la tajeta">
-                <input type="number" name="codseg" id="codseg" placeholder="Ingrese el codigo de seguridad">
-                <input type="text" name="name" id="name" placeholder="Ingrese el nombre del titular">
-                <input type="number" name="dni" id="dni" placeholder="Ingrese el D.N.I. del titular">
-                <button class="buy__btn" id="btn__buy"> Comprar</button>`
-             localStorage.removeItem("cart")
-                })
-
-            }
-            
-        }
-        
-// footer
-
-// Preguntas Frecuentes
-
-let btnShipp = document.getElementById("btn__shipp")
-let contador=0
-function funShipp (){
-if (contador==0)
-{
-btnShipp.innerHTML +=   `
-<section class="modal__quest">
-<h1 class"modal__title">hola</h1>
-<p class"modal__text">esto es una pruba</p>
-</section>
-                        `
-contador=1}
-else{btnShipp.innerHTML =   `
-Envio
-                            `
-    contador=0
-    
+function cartBuy (prodId){
+ const item = cart.find((prod) =>prod.id === prodId)
+ const indice = cart.indexOf(item)
+ cart.splice(indice,1)
+ actCart()
+     contCart.innerHTML = ""
+ const div = document.createElement("div")
+ div.className = ("products__cart")
+ div.innerHTML =" gracias por tu compra =) " 
+contCart.appendChild(div)
+totalPrice.innerHTML = "0"
 }
-}
-btnShipp.addEventListener ("click",funShipp,true)
 
-
-
-
-
-let btnBuy = document.getElementById("btn__buy")
-function funShipp (){
-if (contador==0)
-{
-btnBuy.innerHTML +=   `
-<section class="modal__quest">
-<h1 class"modal__title">hola</h1>
-<p class"modal__text">esto es una pruba</p>
-</section>
-                        `
-contador=1}
-else{btnBuy.innerHTML =   `
-Como Comprar
-                            `
-    contador=0
-    
-}
-}
-btnBuy.addEventListener ("click",funShipp,true)
-
-
+buyCart.addEventListener("click",cartBuy)
 
 // galeria
-const btnClose = document.getElementById("btn__close")
-const btnNext = document.getElementById("btn__next")
-const btnPrev = document.getElementById("btn__prev")
-const lightBox = document.getElementById("contain__main")
-const imgAct =document.getElementById("img__act")
-const images =document.querySelectorAll("#galery img")
-let indexImg =0;
 
-const abriLigthBox = (e) =>{
+const openLigthBox = (e) =>{
     imgAct.src = e.target.src;
     lightBox.style.display = 'flex'
     indexImg = Array.from(images).indexOf(e.target)
 }
 
 images.forEach((imagen)=>{
-    imagen.addEventListener("click",abriLigthBox)
+    imagen.addEventListener("click",openLigthBox)
 })
 
 btnClose.addEventListener("click",()=>{
@@ -356,5 +289,49 @@ let retrocedeImg =()=>{
 }
 btnPrev.addEventListener("click", retrocedeImg)
 
-// machete
-/* <p class="precioCard ${libro.precio <= 2000 ? "ofertaColor" : "precioComun"} ">Precio: ${libro.precio}</p> */
+// footer
+
+// Preguntas Frecuentes
+function funShipp (){
+if (contador==0)
+{
+btnShipp.innerHTML +=   `
+        <section class="modal__quest">
+        <h1 class"modal__title">ENVIO</h1>
+        <h2 class"modal__subtitle"> Como recibo mi producto?</h2>
+        <p class"modal__text"> Si realizas el envio por la pagina, vas a recibir tus productos por medio del transporte selecionado</p>
+        <p class"modal__text"> Si sos de Tucuman podes coordinar con nosotros y te lo enviamos por cadete</p>
+        </section>
+                        `
+contador=1}
+else{btnShipp.innerHTML =   `
+Envio
+                            `
+    contador=0
+    
+}
+}
+btnShipp.addEventListener ("click",funShipp,true)
+
+function funBuy (){
+if (contador==0)
+{
+btnBuy.innerHTML +=   `
+        <section class="modal__quest">
+        <h1 class"modal__title">COMO COMPRAR</h1>
+        <h2 class"modal__subtitle"> Te contamos las formas que tenes para realizar una compra</h2>
+        <p class"modal__text"> 1- Atravez de la pagina desde cualquier parte de la Argentina</p>
+        <p class"modal__text"> 2- Podes contactarnos por WhatsApp</p>
+        </section>
+                        `
+contador=1}
+else{btnBuy.innerHTML =   `
+        Como Comprar
+                            `
+    contador=0
+    
+}
+}
+btnBuy.addEventListener ("click",funBuy,true)
+
+// prueba

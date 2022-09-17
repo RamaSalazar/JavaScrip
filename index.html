@@ -13,34 +13,42 @@
 </head>
 <body>
 <!-- Inicio Header -->
-<header >
-    <img class="logo" src="./img/logo.svg" alt="Logo de la marca">
+<header class="header__darkMode" >
+    <!-- <img id="imgprueba" class="logo" > -->
+
+    <img id="imgprueba" class="logo" src="./img/logo.svg" alt="Logo de la marca">
     <article class="flex">
         <section class="column">
             <h1 class="flex__title">Kuntur</h1>
             <h2 class="flex__subtitle">Ropa de Campo</h2> 
         </section>        
     </article>
-<!-- Dark Mode -->
-    <section class="mode">
-        <button id="btn__dark__mode" class="btn btn-dark">
+<!-- botones header -->
+    <section class="btn__header">
+        <!-- <button onclick= "changeLogo();">prueba</button> -->
+        <!-- <button  id="btn__dark__mode" class="btn btn-dark">
             <img src="img/moon.svg" alt="">
         </button>
-        <button id="btn__light__mode" class="btn btn-light">
+        <button  id="btn__light__mode" class="btn btn-light">
             <img src="img/sun.svg" alt="">
-        </button>   
-        <button  id="cart__btn" type="button">
-            <img src="img/cart.svg" alt="">
-        </button>     
+        </button>    -->
+        <div class="switch">
+            <input type="checkbox" id="nigth">
+        </div>
+        <button  id="cart__btn" class="cart__btn" type="button" ><img   src="img/cart.svg" alt="" class="cart__img" ><span id="acc__cart" class="cart__cant" ><a href="#catalogo">0</a></span></button>
+
     </section>
+<!-- prueba -->
 
 <!-- Carrito -->
- <section class="card__cart">
+<!-- <button id="btn-carrito"><span id="acc__cart">0</span></button> -->
+
+ <!-- <section class="card__cart">
     <article class="modal__card nav__input" id="modal__card"></article>
     <p class="text__cart" id="text__cart"></p>
     <form class="modal__buy" id="modal__buy"></form>   
-</section>   
-<article id="contCart"></article>
+</section>    -->
+<!-- <article id="contCart"></article> -->
 </header>
 <!--Fin header-->
 <!--Inicio body-->
@@ -54,7 +62,8 @@
     </article>
 
 <!-- Catalogo -->
-    <h1 class="title__pages">Catalogo</h1>
+
+    <h1 class="title__pages" id="catalogo">Catalogo</h1>
     <article class="card__cat">
         <h2 class="text__cat">Te mostramos todo lo que tenemos para ofrecerte para mantener la tradicion sin perder el estilo</h2>
         <div class="hide" id="hide__text">
@@ -62,11 +71,21 @@
         </div>
         <button class="verMas__btn" id="hide__text__btn">ver mas</button>        
     </article>
-
+    <section class="cart">
+        <div id="cont__cart" class="cont__cart"> <p>Su carrito se encuentra vacio =(</p></div>
+       
+        <div class="cart__total">
+            <p class="price__total" >Precio Total($):  <span id="total__price">0</span></p>  
+            <button id="btn__buy--cart" class="btn__removeAll">Comprar</button>
+            <button id="btn__removeCart" class="btn__removeAll">Vaciar Carrito</button>  
+        </div>
+    </section>
+    <div id="contCart" ></div>
 <!-- Galeria -->
+
 <h1 class="title__pages">Galeria</h1>
 <article class="card__gal">
-    <h2 class="text__gal">No te imagines como queda la prenda, mejor miralas en nuestros modelos</h2>
+    <h2 class="text__gal">Mira estos momentos que compartimos con grandes amigos</h2>
 </article>
 <section id="galery">
     <img src="./img/img1.png" alt="">
@@ -84,10 +103,10 @@
 </section>
 <section id="contain__main">
     <div id="contain__secon">
-        <img id="img__act" src="./img/img1.png" alt="">
+        <img id="img__act" class="img__act" src="./img/img1.png" alt="">
         <button id="btn__close" type="button">X</button>
-        <button id="btn__next" type="button">next</button>
-        <button id="btn__prev" type="button">prev</button>
+        <button id="btn__next" type="button">&gt;</button>
+        <button id="btn__prev" type="button">&lt;</button>
     </div>
 </section>
 
@@ -107,7 +126,7 @@
     </section>
     <section class="footer__card">
         <h2 class="footer__title">Preguntas Frecuentes</h2>
-            <h3 class="footer__subtitle" id="btn__buy">Como comprar</h3>
+            <h3 class="footer__subtitle" id="btn__buy">Como Comprar</h3>
             <h3 class="footer__subtitle" id="btn__shipp"> Envio</h3>
     </section>
     <section class="footer__card">
