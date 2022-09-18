@@ -40,85 +40,82 @@ const btnPrev = document.getElementById("btn__prev")
 let buyCart = document.getElementById("btn__buy--cart")
 
 
-let dark__mode = localStorage.getItem("nigth") ? localStorage.getItem("nigth") : localStorage.setItem("nigth", "light")
-// console.log(localStorage.getItem("dark__mode"))
 let articleProducts = document.getElementById("products")
 let hide__text__btn = document.getElementById ("hide__text__btn")
 let hide__text = document.getElementById("hide__text")
+let search = document.querySelector(".search")
 const contCart = document.getElementById("cont__cart")
 const counterCart = document.getElementById("acc__cart")
 const totalPrice = document.getElementById("total__price")
-let contador=0
 const lightBox = document.getElementById("contain__main")
 const imgAct =document.getElementById("img__act")
 const images =document.querySelectorAll("#galery img")
 const cartModal = document.getElementById("modal__cart")
-// const prodCart = document.getElementById("products__cart")
+let contador=0
 let indexImg =0;
 let cart = []
 
 // DARK MODE
 
-const mode = document.getElementById("nigth")
+const mode = document.getElementById("night")
 const body = document.querySelector("body")
 
 mode.addEventListener("change",()=>{
-    body.classList.toggle("nigthMode")
-    localStorage.setItem("nigth" , "dark")
+    if(body.classList.toggle("nightMode")){
+        localStorage.setItem("darkMode", "dark")
+    }else{
+        localStorage.setItem("darkMode", "light")
+        document.body.classList.remove("nightMode")
+    }
 })
 
-// prueba cambiar logo
-// const logoMostrado = "logo"
-
-// function changeLogo(){
-//     const img =document.getElementById("imgprueba")
-//     if(logoMostrado == "logo"){
-//         img.src = "./img/logoNeon.jpg"
-//         logoMostrado = "logoNeon"
-//     }else{
-//         img.src = ".img/logo.svg"
-//         logoMostrado = "logo"
-//     }
-// }
-// fin
+let darkMode = localStorage.getItem("darkMode")
+if(darkMode == "dark"){
+    document.body.classList.add("nightMode")
+}else{
+    localStorage.setItem("darkMode", "light")
+    document.body.classList.remove("nightMode")
+}
 
 // MAIN
 
 // Catalogo
 articleProducts.setAttribute("class", "productsStyle")
 hide__text__btn.addEventListener("click", toggleText)
-
  function toggleText(){
     hide__text.classList.toggle("show")
     articleProducts.innerHTML= ""
     if(hide__text.classList.contains("show")){
     hide__text__btn.innerHTML = "ver menos"
+    search.style.display = 'flex'
     }
     else {
     hide__text__btn.innerHTML = "ver mas"
+    search.style.display = 'none'
     }
-    
+
     stock.forEach((prod) =>{
     let newProduct = document.createElement("div")   
-    // setTimeout(()=>{
-    //     Swal.fire({
-    //         title: 'Hola',
-    //         text: `Cualquier consulta que tengas escribinos al WhatsApp`,
-    //         icon: 'info',
-    //         showConfirmButton:false,
-    //         timer:3000
-    //       })
-    // },2000)
-    newProduct.innerHTML = ` <article class="card">
-                                            <h2 class="card__title">${prod.product}</h2>
-                                            <picture>
-                                                <img class="card__img" src="${prod.img}" alt="">
-                                            </picture>
-                                            <p class="card__description">${prod.description}</p>
-                                            <h4 class="card__price">$${prod.price}</h4>
-                                            <button id="addToCart${prod.id}" class="card__button" >Agregar al carrito</button>
-                                        </article>
-                                       `
+    setTimeout(()=>{
+        Swal.fire({
+            title: 'Hola',
+            text: `Cualquier consulta que tengas escribinos al WhatsApp`,
+            icon: 'info',
+            showConfirmButton:false,
+            timer:3000
+          })
+    },2000)
+    newProduct.innerHTML = `
+                            <article class="card">
+                                <h2 class="card__title">${prod.product}</h2>
+                                <picture>
+                                    <img class="card__img" src="${prod.img}" alt="">
+                                </picture>
+                                <p class="card__description">${prod.description}</p>
+                                <h4 class="card__price">$${prod.price}</h4>
+                                <button id="addToCart${prod.id}" class="card__button" >Agregar al carrito</button>
+                            </article>
+                           `
  
     articleProducts.appendChild(newProduct)
     const btnAddCart = document.getElementById( `addToCart${prod.id}`)
@@ -129,6 +126,28 @@ hide__text__btn.addEventListener("click", toggleText)
 
 }
 )}
+
+// Buscador
+
+document.addEventListener("keyup", e=>{
+
+    if (e.target.matches("#searcher")){
+  
+        if (e.key ==="Escape")e.target.value = ""
+  
+        document.querySelectorAll(".card").forEach(fruta =>{
+  
+            fruta.textContent.toLowerCase().includes(e.target.value.toLowerCase())
+              ?fruta.classList.remove("filter")
+              :fruta.classList.add("filter")
+        })
+  
+    }
+  
+  
+  })
+
+// Carrito
 
 const addCart = (prodId) => {
     const exits = cart.some (prod => prod.id === prodId)
@@ -161,83 +180,34 @@ const actCart = () =>{
                         <button onclick = "deletCart(${prod.id})" class="btn__delete"><img src="./img/delete.svg" alt=""></button>
                                 `
         contCart.appendChild(div)
-        // localStorage.setItem("carrito",JSON.stringify(carrito))
     })
     counterCart.innerHTML = cart.length
     totalPrice.innerHTML = cart.reduce((acc, prod) => acc + prod.price * prod.cant,0)
-
+    addLocalStorage()
 }
 
 const deletCart = (prodId) =>{
+    
+    const exits = cart.some (prod => prod.id === prodId)
+    if(exits){
+        const prod = cart.map (prod => {
+            if (prod.id === prodId){
+                prod.cant = 0
+            }
+        })
+    }
     const item = cart.find((prod) =>prod.id === prodId)
     const indice = cart.indexOf(item)
     cart.splice(indice,1)
     actCart()
+    
 }
-
-
-// const deletCart = (prod) => {
-//     const prodCart = document.getElementById("products__cart")
-//     const cantidad = document.getElementById("cantidad")
-//     const div = document.createElement("div")
-//     div.innerHTML = "hola   "
-//     cantidad.remove(prod.cant)
-//     prodCart.remove()
-//     // totalPrice.innerHTML = cart.reduce((acc, prod) => acc + prod.price * prod.cant,0)
-// }
-
-
-// prueba
-// function deletCart(e){
-//     const btnDelet = e.target
-//     const div = btnDelet.closest("#products__cart")
-//     const cant = div.querySelector("#cantidad").textContent
-//     for(let i=0; i<cart.length ; i++){
-//         if(cart[i].cant.trim() === cant.trim()){
-//             cart.splice(i,1)
-//         }
-//     }
-//     div.remove()
-//     actCart()
-// }
-// fin pruba 
-
-// prueba 2
-    // function deletCart(e){
-    //     if (e.target.classList.contains("btn__delete")){
-    //         const deleteId = e.target.getAttribute("id")
-    //         cart.forEach(value=>{
-    //             if(value.id ==deleteId){
-    //                 totalPrice.innerHTML = cart.reduce((acc, prod) => acc + prod.price * prod.cant,0)
-    //             }
-    //         })
-    //         cart = cart.filter(prod => prod.id !== deleteId)
-    //     }
-    //     if(cart.length === 0){
-    //         totalPrice.innerHTML = 0
-    //         counterCart = 0 
-    //     }
-    //     actCart()
-    // }
-// fin prueba
-
 
 btnRemove.addEventListener("click",()=>{
     cart.length = 0 
     actCart()
 })
-// btnRemove.addEventListener("click",()=>{
-//     const prodCart = document.getElementById("products__cart")
 
-//     if( prodCart == ""){
-//         contCart.innerHTML += "Su carrito se encuentra ya se encuentra vacio"
-//     }
-//     else{
-//         cart.length = 0 
-//         actCart()
-//     }
- 
-// })
 
 function cartBuy (prodId){
  const item = cart.find((prod) =>prod.id === prodId)
@@ -256,14 +226,14 @@ buyCart.addEventListener("click",cartBuy)
 
 // galeria
 
-const openLigthBox = (e) =>{
+const openLightBox = (e) =>{
     imgAct.src = e.target.src;
     lightBox.style.display = 'flex'
     indexImg = Array.from(images).indexOf(e.target)
 }
 
 images.forEach((imagen)=>{
-    imagen.addEventListener("click",openLigthBox)
+    imagen.addEventListener("click",openLightBox)
 })
 
 btnClose.addEventListener("click",()=>{
@@ -334,4 +304,17 @@ else{btnBuy.innerHTML =   `
 }
 btnBuy.addEventListener ("click",funBuy,true)
 
-// prueba
+// Local Storage
+ function addLocalStorage(){
+    localStorage.setItem("cart", JSON.stringify(cart))
+ }
+ window.onload = function(){
+    const storage = JSON.parse(localStorage.getItem("cart"))
+    if(storage){
+        cart = storage
+        totalPrice.innerHTML = cart.reduce((acc, prod) => acc + prod.price * prod.cant,0)
+        actCart()
+
+    }
+ }
+

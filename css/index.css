@@ -60,7 +60,7 @@ input{
 }
 
 /* Dark Mode */
-.nigthMode{
+.nightMode{
     transition: 4s all ease-in;
     background: #0d1117;
     color: #d1d5da;
@@ -229,7 +229,13 @@ main{
 
 .verMas__btn{
     margin-top: 1rem;
-    width: 70px;
+    width: 100px;
+    height: 30px;
+    border: 2px;
+    border-color: #271052;
+    border-radius: 20px;
+    background-color: #3a1d6d;
+    color: #ffdf5d;
 }
 
 .hide{
@@ -249,7 +255,7 @@ main{
     align-items: center;
     background-color: wheat;
     border-radius: 2%;
-    margin-top: 1rem;
+    margin: 1rem;
 }
 
 .card__title{
@@ -364,6 +370,18 @@ main{
     margin-top: 1rem;
 }
 
+/* Buscador */
+
+.search{
+    display: none;
+    margin-bottom: 2rem;
+}
+
+.filter{
+    display: none;
+}
+
+
 /* Galeria */
 .card__gal{
     display: flex;
@@ -475,9 +493,6 @@ main{
 /* FOOTER */
 footer {
     background-color: #0d1117;
-    /* background-color: #ffffff4d;
-    backdrop-filter: blur(3px);
-    -webkit-backdrop-filter: blur(3px); */
     display: flex;
     flex-direction: row;
     justify-content: space-around;
